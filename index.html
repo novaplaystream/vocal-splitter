@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>stem-splitr | Premium UI</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
+
+    :root {
+      --bg: #0b0f14;
+      --bg2: #0f1620;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --text: #eaf2ff;
+      --muted: #b2c0d6;
+      --accent: #7ef9ff;
+      --accent2: #a6ff7a;
+      --stroke: rgba(255, 255, 255, 0.14);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: "Space Grotesk", system-ui, -apple-system, Segoe UI, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      background:
+        radial-gradient(1200px 500px at 80% -10%, rgba(126, 249, 255, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 10% 10%, rgba(166, 255, 122, 0.16), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+
+    .topo {
+      position: absolute;
+      inset: 0;
+      opacity: 0.15;
+      background-image: linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(800px 400px at 20% 0%, black, transparent 70%);
+      pointer-events: none;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 20px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 30px rgba(126, 249, 255, 0.25);
+    }
+
+    .hero {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .headline {
+      font-family: "Fraunces", serif;
+      font-size: clamp(34px, 4vw, 60px);
+      line-height: 1.05;
+      margin: 0 0 16px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 0 0 24px;
+    }
+
+    .cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(255,255,255,0.04);
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      font-weight: 600;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0b0f14;
+      border-color: transparent;
+    }
+
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,0.08); }
+    .btn.primary:hover { filter: brightness(1.05); }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: -30% -10% auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(126,249,255,0.35), transparent 60%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .meter {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .grid {
+      margin-top: 48px;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 { margin: 6px 0 8px; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .section {
+      margin-top: 48px;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .code {
+      background: #0a1119;
+      border: 1px solid var(--stroke);
+      border-radius: 12px;
+      padding: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      color: #dbe8ff;
+      white-space: pre-wrap;
+    }
+
+    .footer {
+      margin-top: 60px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .section { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topo"></div>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo"></div>
+          <div>stem-splitr</div>
+        </div>
+        <div class="cta">
+          <a class="btn" href="https://github.com/novaplaystream/stem-splitr" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn primary" href="#start">Run on Colab</a>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div>
+          <h1 class="headline">Split stems. Find tempo. Know the key.</h1>
+          <p class="sub">A free, pro-grade pipeline powered by Demucs and librosa. Upload a song, generate clean stems, and read BPM + key in one run.</p>
+          <div class="cta">
+            <a class="btn primary" href="#start">Start Now</a>
+            <a class="btn" href="#cli">CLI Usage</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div style="font-weight:600;">Live Preview</div>
+          <div style="color:var(--muted); font-size:13px;">Estimated from audio signal</div>
+          <div class="meter">
+            <div>Tempo: 124.8 BPM</div>
+            <div class="bar"><span style="width:74%"></span></div>
+            <div>Key: A minor</div>
+            <div class="bar"><span style="width:63%"></span></div>
+            <div>Stems: vocals | drums | bass | other</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Studio-Grade Separation</h3>
+          <p>Demucs splits vocals, drums, bass, and instruments with crisp isolation.</p>
+        </div>
+        <div class="card">
+          <h3>Tempo + Key Finder</h3>
+          <p>Instant BPM and key estimation with chroma-based analysis.</p>
+        </div>
+        <div class="card">
+          <h3>Free and Open</h3>
+          <p>MIT license, no paywalls, no locked models.</p>
+        </div>
+      </div>
+
+      <div id="start" class="section">
+        <div class="card">
+          <h3>Run on Colab (No Install)</h3>
+          <p>Upload <strong>app.py</strong> and your song, run one command, download stems.</p>
+          <div class="code">!pip -q install demucs librosa numpy soundfile
+from google.colab import files
+files.upload()
+!python app.py "song.mp3" --out outputs --format wav</div>
+        </div>
+        <div class="card">
+          <h3>Download Output</h3>
+          <p>Zip the outputs and download to your device.</p>
+          <div class="code">import shutil
+from google.colab import files
+shutil.make_archive("stems", "zip", "outputs")
+files.download("stems.zip")</div>
+        </div>
+      </div>
+
+      <div id="cli" class="section">
+        <div class="card">
+          <h3>CLI Usage</h3>
+          <div class="code">python app.py "song.mp3" --out outputs --format wav
+python app.py "song.mp3" --out outputs --format mp3
+python app.py "song.mp3" --json</div>
+        </div>
+        <div class="card">
+          <h3>Notes</h3>
+          <p>Only process audio you own or have rights to. Tempo/key are estimates and depend on input quality.</p>
+        </div>
+      </div>
+
+      <div class="footer">Built by NovaPlay • Free stem splitter + tempo/key finder</div>
+    </div>
+  </div>
+</body>
+</html>
